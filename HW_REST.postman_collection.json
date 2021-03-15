@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "dacef79a-edf9-4be5-a0ed-1797aab55c45",
+		"name": "HW_REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "movie_lang",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check name\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.data.name).to.eql(\"Captain Marvel\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{movies}}/10/translations/eng",
+					"host": [
+						"{{movies}}"
+					],
+					"path": [
+						"10",
+						"translations",
+						"eng"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies_photo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Age is present\", function () {\r",
+							"    pm.response.to.have.header(\"Age\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://artworks.thetvdb.com/banners/movies/10/posters/{{marvel}}",
+					"protocol": "https",
+					"host": [
+						"artworks",
+						"thetvdb",
+						"com"
+					],
+					"path": [
+						"banners",
+						"movies",
+						"10",
+						"posters",
+						"{{marvel}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movie_marvel",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body({\"status\":\"success\",\"data\":{\"id\":10,\"name\":\"Captain Marvel\",\"slug\":\"captain-marvel\",\"image\":\"https://artworks.thetvdb.com/banners/movies/10/posters/5f0b792fb2a15.jpg\",\"nameTranslations\":[\"hun\",\"pol\",\"kor\",\"spa\",\"tur\",\"heb\",\"zho\",\"por\",\"rus\",\"eng\",\"deu\",\"pt\",\"est\",\"fra\",\"ita\"],\"overviewTranslations\":[\"hun\",\"pol\",\"kor\",\"spa\",\"tur\",\"heb\",\"zho\",\"por\",\"rus\",\"eng\",\"deu\",\"pt\",\"est\",\"fra\",\"ita\",\"ita\"],\"aliases\":[],\"score\":825,\"status\":{\"id\":5,\"name\":\"Released\",\"recordType\":\"movie\",\"keepUpdated\":true}}});\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{movies}}/10",
+					"host": [
+						"{{movies}}"
+					],
+					"path": [
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movie_pirates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check id\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.data.id).to.eql(64);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{movies}}/64",
+					"host": [
+						"{{movies}}"
+					],
+					"path": [
+						"64"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "artwork-types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api4.thetvdb.com/v4/{{art_type}}",
+					"protocol": "https",
+					"host": [
+						"api4",
+						"thetvdb",
+						"com"
+					],
+					"path": [
+						"v4",
+						"{{art_type}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "seasons",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check network name\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.data.network.name).to.eql(\"MUTV\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{seasons}}/140",
+					"host": [
+						"{{seasons}}"
+					],
+					"path": [
+						"140"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJzdHJpbmciLCJjb21tdW5pdHlfc3VwcG9ydGVkIjpmYWxzZSwiZXhwIjoxNjE2MTM5ODc0LCJpZCI6IjAiLCJpc19tb2QiOmZhbHNlLCJpc19zeXN0ZW1fa2V5IjpmYWxzZSwicGluIjoic3RyaW5nIn0.kOWdUVFiPWQXiKg08Xov2qkKFgabrfwlL32N8bOCNyYXUEjX7O8bmnrRnPqTgGkHC1hcHizKYRQPLLPtHI4jWcTII9028eSL0zkgNYARjt72Zb3tXlTo16DIlWqo4I3_wiusDY_M3WXR7xfR2sGj286rUZWtySptqIskhtAh5pe4jlRUg93QaiHqP7ujqDtbISqGhNKE3lJifqnC32p2pj09NjCVmNTD6RK69YMTNMtm41S75_wRSNipX_iPUnG3Ri8fiISOYf6veV3RAi0f9gyp4xOEjPiwhxRMUy0OdI8FGlVrL5pRFkQ9OW13mrWZjLjky3hIe1Bx5jshZn9Qaaq6yil0YbYebTwCuaJWXS2VCCToaa9Rg5DrBRyGuI8g6BRZ5vGGJ56AHuNeXfnjwYjCVjz7fXQzy7xA7Lua0AmS1g8TVrcZEL9zURzD6yR-SK5D-inOICUFEAzb4d9Kw2zBiZXQeiojcpumpaJytY5XfNqO6h2qeMbER1v2IA3hZ2mQJLmQWgHk6ZkGCtK5XwJxbk-J8b7SaWk7Dy61SA4HT_BN7DATIvOQ-YeJFTgbcwkmEBLXMffvVfNojQA5g9eWz6NkzwfP_Rsn_dxIY64yTdNx2RXTEtSu3Z7hRoaq6-YiAHBHGTSgGyyQ38Zfp9dwve82QTpZ_Or0S4NliFI",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"pm.test(\"Response time is less than 500ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(500);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Us_rs",
+			"value": "users"
+		},
+		{
+			"key": "movies",
+			"value": "https://api4.thetvdb.com/v4/movies"
+		},
+		{
+			"key": "marvel",
+			"value": "5f0b792fb2a15.jpg"
+		},
+		{
+			"key": "art_type",
+			"value": "artwork-types"
+		},
+		{
+			"key": "seasons",
+			"value": "https://api4.thetvdb.com/v4/seasons"
+		}
+	]
+}
